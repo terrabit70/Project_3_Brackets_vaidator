@@ -52,11 +52,6 @@ def bracket_index(bracket):
             else:
                 temporary_index += 1
 
-def bracket_type(bracket):
-    if bracket in opened_brackets:
-        return 'opened'
-    else:
-        return 'closed'
 
 input_string = input()
 index = 0
@@ -64,21 +59,22 @@ is_valid = False
 
 previous_index = 0
 current_index = 0
+temporary_string = []
+
+current_opened_index = 0
+current_closed_index = 0
 
 for ch in input_string:
     if ch in opened_brackets+closed_brackets:
         if (index == 0) and (ch in closed_brackets):
             print(is_valid)
             break
-        else:
-            if index > 0
+#        temporary_string.append(ch)
+#        previous_index = current_index
+#        current_index += current_index
+#        if index > 0:
+#            if ch in closed_brackets:
+#
+#
+#    index += 1
 
-
-
-
-
-
-
-
-
-    index += 1
