@@ -1,3 +1,4 @@
+'''
 print('****************************************************')
 print('*             Brackets Validator V 0.2             *')
 print('*        It can validates only "()" brackets       *')
@@ -7,20 +8,14 @@ print('****************************************************')
 
 def is_valid(text):
     brackets_counter = 0
-    iterator = 0
-    while iterator in range(len(text)):
-        if text[iterator] == '(':
+    for ch in text:
+        if ch == '(':
             brackets_counter += 1
-        elif text[iterator] == ')':
+        elif ch == ')':
             brackets_counter -= 1
             if brackets_counter < 0:
-                break
-        iterator += 1
-    if brackets_counter == 0:
-        string_valid = True
-    else:
-        string_valid = False
-    return string_valid
+                return False
+    return brackets_counter == 0
 
 
 text_1 = '(n(o(r)m)a)s'
@@ -29,9 +24,61 @@ text_3 = ')()( zalupa'
 text_4 = '())(() zalupa'
 text_5 = '((()))'
 
+
 assert (is_valid(text_1))
 assert (not is_valid(text_2))
 assert (not is_valid(text_3))
 assert (not is_valid(text_4))
 assert (is_valid(text_5))
 print('SUCCESS!')
+
+'''
+
+opened_brackets = '([{'
+closed_brackets = ')]}'
+
+def bracket_index(bracket):
+    temporary_index = 0
+    if bracket in opened_brackets:
+        for ch in opened_brackets:
+            if opened_brackets[temporary_index] == bracket:
+                return temporary_index
+            else:
+                temporary_index += 1
+    else:
+        for ch in closed_brackets:
+            if closed_brackets[temporary_index] == bracket:
+                return temporary_index
+            else:
+                temporary_index += 1
+
+def bracket_type(bracket):
+    if bracket in opened_brackets:
+        return 'opened'
+    else:
+        return 'closed'
+
+input_string = input()
+index = 0
+is_valid = False
+
+previous_index = 0
+current_index = 0
+
+for ch in input_string:
+    if ch in opened_brackets+closed_brackets:
+        if (index == 0) and (ch in closed_brackets):
+            print(is_valid)
+            break
+        else:
+            if index > 0
+
+
+
+
+
+
+
+
+
+    index += 1
