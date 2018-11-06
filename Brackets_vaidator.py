@@ -66,15 +66,27 @@ current_closed_index = 0
 
 for ch in input_string:
     if ch in opened_brackets+closed_brackets:
-        if (index == 0) and (ch in closed_brackets):
-            print(is_valid)
-            break
-#        temporary_string.append(ch)
-#        previous_index = current_index
-#        current_index += current_index
-#        if index > 0:
-#            if ch in closed_brackets:
-#
-#
-#    index += 1
+       temporary_string.append(ch)
 
+if (temporary_string[0] in closed_brackets) or (temporary_string[len(temporary_string)-1] in opened_brackets):
+    is_valid = False
+    print('GOVNO')
+
+
+for ch in input_string:
+    previous_index = current_index
+    current_index += 1
+    if current_index % 2 == 0:
+        print(temporary_string)
+        print(previous_index)
+        print(current_index)
+        print(temporary_string[previous_index-1])
+        print(temporary_string[current_index-1])
+        if (temporary_string[previous_index-1] != temporary_string[current_index-1]):
+            if (bracket_index(temporary_string[previous_index-1]) == bracket_index(temporary_string[current_index-1])):
+                previous_index = 0
+                current_index = 0
+                is_valid = True
+
+
+print(is_valid)
