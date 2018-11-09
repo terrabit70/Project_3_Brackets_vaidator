@@ -72,21 +72,12 @@ if (temporary_string[0] in closed_brackets) or (temporary_string[len(temporary_s
     is_valid = False
     print('GOVNO')
 
+for i in range(len(opened_brackets)):
+    if temporary_string.count(opened_brackets[i]) != temporary_string.count(closed_brackets[i]):
+        is_valid = False
+        print('ZHOPA')
+        break
 
-for ch in input_string:
-    previous_index = current_index
-    current_index += 1
-    if current_index % 2 == 0:
-        print(temporary_string)
-        print(previous_index)
-        print(current_index)
-        print(temporary_string[previous_index-1])
-        print(temporary_string[current_index-1])
-        if (temporary_string[previous_index-1] != temporary_string[current_index-1]):
-            if (bracket_index(temporary_string[previous_index-1]) == bracket_index(temporary_string[current_index-1])):
-                previous_index = 0
-                current_index = 0
-                is_valid = True
-
+is_valid = True
 
 print(is_valid)
