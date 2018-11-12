@@ -52,32 +52,40 @@ def bracket_index(bracket):
             else:
                 temporary_index += 1
 
+def validation(string):
+    temporary_string = []
+    global is_valid
+
+    for ch in string:
+        if ch in opened_brackets + closed_brackets:
+            temporary_string.append(ch)
+
+    if (temporary_string[0] in closed_brackets) or (temporary_string[len(temporary_string) - 1] in opened_brackets):
+        is_valid = False
+        print('GOVNO')
+        return False
+
+    for i in range(len(opened_brackets)):
+        if temporary_string.count(opened_brackets[i]) != temporary_string.count(closed_brackets[i]):
+            is_valid = False
+            print('ZHOPA')
+            return False
+
+    for i in range(len(temporary_string)):
+        if (temporary_string[i] in closed_brackets) and (
+                bracket_index(temporary_string[i]) != bracket_index(temporary_string[i - 1])):
+            is_valid = False
+            print('pizdes')
+            return False
+
+    is_valid = True
+    return True
+
 
 input_string = input()
-index = 0
-is_valid = False
+#index = 0
 
-previous_index = 0
-current_index = 0
-temporary_string = []
-
-current_opened_index = 0
-current_closed_index = 0
-
-for ch in input_string:
-    if ch in opened_brackets+closed_brackets:
-       temporary_string.append(ch)
-
-if (temporary_string[0] in closed_brackets) or (temporary_string[len(temporary_string)-1] in opened_brackets):
-    is_valid = False
-    print('GOVNO')
-
-for i in range(len(opened_brackets)):
-    if temporary_string.count(opened_brackets[i]) != temporary_string.count(closed_brackets[i]):
-        is_valid = False
-        print('ZHOPA')
-        break
-
-is_valid = True
-
+validation(input_string)
 print(is_valid)
+
+
