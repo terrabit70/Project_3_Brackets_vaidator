@@ -1,37 +1,62 @@
-print('****************************************************')
-print('*             Brackets Validator V 0.2             *')
-print('*        It can validates only "()" brackets       *')
-print('*       It have a validate function and tests      *')
-print('****************************************************')
+opened_brackets = '([{'
+closed_brackets = ')]}'
 
+stack = []
 
-def is_valid(text):
-    brackets_counter = 0
-    iterator = 0
-    while iterator in range(len(text)):
-        if text[iterator] == '(':
-            brackets_counter += 1
-        elif text[iterator] == ')':
-            brackets_counter -= 1
-            if brackets_counter < 0:
-                break
-        iterator += 1
-    if brackets_counter == 0:
-        string_valid = True
+def brackets_equal(opened_bracket, closed_bracket):
+    if opened_brackets.find(opened_bracket) == closed_brackets.find(closed_bracket):
+        return True
     else:
-        string_valid = False
-    return string_valid
+        return False
+
+def validation(string):
+    for symbol in string:
+        if symbol in opened_brackets:
+            stack.append(symbol)
+        if symbol in closed_brackets:
+            if not brackets_equal(stack[len(stack)-1], symbol):
+                return False
+            else:
+                stack.pop(len(stack)-1)
+
+    return True
 
 
-text_1 = '(n(o(r)m)a)s'
-text_2 = '(()))()()( zalupa'
-text_3 = ')()( zalupa'
-text_4 = '())(() zalupa'
-text_5 = '((()))'
+valid_tests = [
+'()',
+'[]',
+'{}',
+'()[]{}',
+'([{}])',
+'{([])}',
+'[{()}]',
+'(qwe)  [qwe]  {qwe}',
+'1(2[3{4}5]6)7',
+'1{2(3[4]5)6}7',
+'1[2{3(4)5}6]7',
+'({{}}[[[({})]]])',
+'(n(o(r)m)a)s',
+'((()))'
+]
 
-assert (is_valid(text_1))
-assert (not is_valid(text_2))
-assert (not is_valid(text_3))
-assert (not is_valid(text_4))
-assert (is_valid(text_5))
-print('SUCCESS!')
+for test in valid_tests:
+    print ('valid text: ' + test)
+    assert (validation(test))
+
+invalid_tests = [
+'({)}',
+'[(])',
+'{[[]}]',
+'({)[}]',
+'(1[2{3{}4]5)',
+'{([(])})',
+'[{({)}]',
+'[qwe)  {qwe]  (qwe}',
+'(()))()()( zalupa',
+')()( zalupa',
+'())(() zalupa'
+]
+
+for test in invalid_tests:
+    print ('invalid text: ' + test)
+    assert (not validation(test))
