@@ -4,12 +4,11 @@ closed_brackets = ')]}'
 stack = []
 
 def brackets_equal(opened_bracket, closed_bracket):
-    if opened_brackets.find(opened_bracket) == closed_brackets.find(closed_bracket):
-        return True
-    else:
-        return False
+    return opened_brackets.find(opened_bracket) == closed_brackets.find(closed_bracket)
 
-def validation(string):
+def validate(string):
+    if len(string) == 1:
+        return False
     for symbol in string:
         if symbol in opened_brackets:
             stack.append(symbol)
@@ -17,7 +16,7 @@ def validation(string):
             if not brackets_equal(stack[len(stack)-1], symbol):
                 return False
             else:
-                stack.pop(len(stack)-1)
+                stack.pop()
 
     return True
 
@@ -41,9 +40,11 @@ valid_tests = [
 
 for test in valid_tests:
     print ('valid text: ' + test)
-    assert (validation(test))
+    assert validate(test)
 
 invalid_tests = [
+'(',
+'}',
 '({)}',
 '[(])',
 '{[[]}]',
@@ -59,4 +60,4 @@ invalid_tests = [
 
 for test in invalid_tests:
     print ('invalid text: ' + test)
-    assert (not validation(test))
+    assert not validate(test)
